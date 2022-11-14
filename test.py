@@ -18,9 +18,9 @@ void loop()
 }
 """
 
-t1 = 0
-t2 = 1
-t3 = 2
-
-if t1 == 0 and t2 == 1 or t3 == 2:
-    print("Yesss")
+file = open("test.txt", "r")
+x = 0
+for line in file:
+    x += 1
+    if line == "\n":
+        print(f"Vide, ligne n°{x}")

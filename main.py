@@ -84,7 +84,7 @@ for i in range(nb_module):
                             f"2 : Entrée Digital              6 : Bouton poussoir\n"
                             f"3 : Sortie Analogique           7 : Moteur Pas à Pas\n"
                             f"4 : Entrée Analogique\n\n"
-                            f"(Ajout de plus types à venir !)--> "))
+                            f"(Ajout de plus de types à venir !)--> "))
         right = True
         if reponse == '1':
             arduino[len(arduino)-1].type = "s_digital"
@@ -125,10 +125,10 @@ for i in range(len(arduino)):
         file.write(f"\tpinMode({arduino[i].nom}, INPUT)")
     elif arduino[i].type == "bp_pullup":
         file.write(f"\tpinMode({arduino[i].nom}, INPUT_PULLUP)")
-file.write("\n}\nvoid loop()\n{\n")
+file.write("\n}\nvoid loop()\n{\n\n\n}")
 file.close()
 
-reponse = str(input("Explique ce que tu comptes faire !")).strip()
+reponse = str(input("Explique ce que tu comptes faire !\n -->")).strip()
 
 interpretation = reponse.lower().split(".")
 

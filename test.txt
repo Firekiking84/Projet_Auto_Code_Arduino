@@ -1,0 +1,10 @@
+#define led 5
+
+void setup(){
+    pinMode(led, OUTPUT);
+    }
+void loop(){
+    if (digitalRead(bp1) == 1) {
+
+    }
+}
