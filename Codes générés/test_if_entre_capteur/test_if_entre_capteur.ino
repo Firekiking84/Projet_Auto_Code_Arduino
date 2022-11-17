@@ -11,3 +11,8 @@ void loop()
 {
 POT_value = analogRead(POT);
 POT1_value = analogRead(POT1);
+if (POT_value == POT1_value) {
+
+}
+
+}

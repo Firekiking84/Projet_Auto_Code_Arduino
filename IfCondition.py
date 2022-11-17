@@ -70,6 +70,7 @@ def IfCondition(mot_action, x, inoPath, arduino):
     increment_line(2)
 
 
+
 def inf_ou_egal(mot_action, x):
     if mot_action[x] == "ou" and mot_action[x + 1] in egal:
         x += 2
