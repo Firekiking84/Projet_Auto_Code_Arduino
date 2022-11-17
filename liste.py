@@ -15,6 +15,8 @@ def formatage_txt(txt):
 
 """Vocabulaire"""
 
+alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
+            "v", "w", "x", "y", "z"]
 si = ["if", "si", "quand"]
 tant_que = ["while", "tantque"]
 tant = ["tant", "tandis"]
@@ -45,3 +47,4 @@ time_unit = ["h", "heure", "heures", "min","minutes", "minute",  "s", "seconde",
 
 analog_input = ["e_analog"]
 digital_input = ["bp_pullup", "e_digital"]
+digital_output = ["s_digital", "led"]

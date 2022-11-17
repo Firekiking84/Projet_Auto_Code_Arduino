@@ -1,5 +1,6 @@
 from IfCondition import IfCondition
 from liste import *
+from actionContent import actionContent
 
 
 def Brain(reponse, inoPath, arduino):
@@ -11,5 +12,8 @@ def Brain(reponse, inoPath, arduino):
         while x < len(mot_action):
             if mot_action[x] in si:
                 IfCondition(mot_action, x, inoPath, arduino)
+
+            else:
+                actionContent(mot_action, x, inoPath, arduino)
             x += 1
         i += 1

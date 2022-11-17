@@ -1,3 +1,5 @@
+from math import exp
+
 """
 Objectif clignoter une led toutes les 5 secondes
 Code Arduino voulu :
@@ -15,11 +17,3 @@ void loop()
     delay(5000);
 }
 """
-
-class Module:
-    def __init__(self, nom, pin="N/A", type="digital"):
-        self.nom = nom
-        self.pin = pin
-        self.type = type
-
-arduino = []
