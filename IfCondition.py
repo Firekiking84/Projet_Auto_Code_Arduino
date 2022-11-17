@@ -2,6 +2,7 @@ from liste import *
 from clearWrite import clearWrite
 from increment_line import increment_line
 from name_finder import name_finder
+from actionContent import actionContent
 
 
 def IfCondition(mot_action, x, inoPath, arduino):
@@ -40,7 +41,6 @@ def IfCondition(mot_action, x, inoPath, arduino):
 
     elif mot_action[x] in superieur:
         x += 1
-        print("Supérieur !!")
         cmp2 = sup_ou_egal(mot_action, x)
 
     if mot_action[x] in allumer:
@@ -69,6 +69,7 @@ def IfCondition(mot_action, x, inoPath, arduino):
     clearWrite(inoPath, f"if ({cmp1}{cmp2}{cmp3}) {{\n\n}}\n\n")
     increment_line(2)
 
+    actionContent(mot_action, x, inoPath, arduino)
 
 
 def inf_ou_egal(mot_action, x):

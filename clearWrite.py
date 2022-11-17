@@ -5,7 +5,6 @@ def clearWrite(path, msg):
     file = open(path, "r")
     information = file.readlines()
     file.close()
-    print(f"Print à la ligne : {int(current_line)}\n")
     information[int(current_line)] = msg
     file = open(path, "w")
     for x in range(len(information)):

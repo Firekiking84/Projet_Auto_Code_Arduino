@@ -27,12 +27,19 @@ article_indefini = ["un", "une", "des"]
 adjectif_indefini = ["Aucun", "autre", "certain", "chaque", "différents", "divers", "l'un", "l'autre", "maint", "même",
                      "nul", "plusieurs", "quel", "quelconque", "quelque", "tel", "tout"]
 chiffre = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
-time_unit = ["heure", "heures", "minutes", "minute", "seconde", "secondes", "millisecondes", "milliseconde"]
 tout = ["tous", "tout", "toutes", "toute"]
 inferieur = ["inferieur", "sous", "inférieur"]
 egal = ["egal", "egale", "égale", "égal"]
 superieur = ["superieur", "au-dessus", "supérieur"]
 a = ["a", "à"]
+alors = ["alors", "Alors"]
+ensuite = ["ensuite", "après", "apres", "puis"]
+stopper = [".", "et", ","]
+
+"""Time Unit"""
+
+time_unit = ["h", "heure", "heures", "min","minutes", "minute",  "s", "seconde", "secondes", "ms", "millisecondes",
+             "milliseconde"]
 
 """Type"""
 
