@@ -16,8 +16,12 @@ class Module:
         self.pin = pin
         self.type = type
 
-
 arduino = []
+
+file = open("current_line.txt", 'w')
+file.write('0')
+file.close()
+current_line = 0
 
 print('\033[93m')
 print("Bienvenue dans l'Autocodeur Arduino !")
@@ -36,13 +40,14 @@ while not right:
     else:
         right= True
         reponse = formatage_txt(reponse)
-        print(reponse)
-        os.mkdir(f"{path}/Codes générés/{reponse}")
+        if not os.path.exists(f"{path}/Codes générés/{reponse}"):
+            os.mkdir(f"{path}/Codes générés/{reponse}")
         file = open(f"{path}/Codes générés/{reponse}/{reponse}.ino", "w")
         file.close()
         inoPath = f"{path}/Codes générés/{reponse}/{reponse}.ino"
 
 refresh_screen()
+print(f"Nom final du fichier : {reponse}.ino")
 right = False
 while not right:
     reponse = str(input("Combien de modules sont branchés sur l'Arduino ? \n--> ")).strip()
@@ -112,24 +117,36 @@ for i in range(len(arduino)):
 
     # Définition des ports
     if arduino[i].type in define:
-        file.write(f"#define {arduino[i].nom} {arduino[i].pin}")
+        file.write(f"#define {arduino[i].nom} {arduino[i].pin}\n")
+        current_line += 1
+    if arduino[i].type in analog_input or arduino[i].type in digital_input:
+        file.write(f"int {arduino[i].nom}_value = 0;\n")
+        current_line += 1
 
 file.write("\nvoid setup()\n{\n")
+current_line += 3
 for i in range(len(arduino)):
 
     # void Setup
 
     if arduino[i].type == "s_digital" or arduino[i].type == "led":
-        file.write(f"\tpinMode({arduino[i].nom}, OUTPUT)")
+        file.write(f"\tpinMode({arduino[i].nom}, OUTPUT);")
+        current_line += 1
     elif arduino[i].type == "e_digital":
-        file.write(f"\tpinMode({arduino[i].nom}, INPUT)")
+        file.write(f"\tpinMode({arduino[i].nom}, INPUT);")
+        current_line += 1
     elif arduino[i].type == "bp_pullup":
-        file.write(f"\tpinMode({arduino[i].nom}, INPUT_PULLUP)")
-file.write("\n}\nvoid loop()\n{\n\n\n}")
+        file.write(f"\tpinMode({arduino[i].nom}, INPUT_PULLUP);")
+        current_line += 1
+file.write("\n}\nvoid loop()\n{\n\n}")
+current_line += 4
 file.close()
 
 reponse = str(input("Explique ce que tu comptes faire !\n -->")).strip()
 
+file = open("current_line.txt", "w")
+file.write(str(current_line))
+file.close()
 interpretation = reponse.lower().split(".")
 
 Brain(interpretation, inoPath, arduino)

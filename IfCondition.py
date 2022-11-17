@@ -1,26 +1,30 @@
 from liste import *
-from Pwrite import clearWrite
+from clearWrite import clearWrite
+from increment_line import increment_line
+from name_finder import name_finder
 
 
 def IfCondition(mot_action, x, inoPath, arduino):
     x += 1
-    n = 0
-    cmp1 = ""
     cmp2 = ""
     cmp3 = ""
-    while n < len(arduino):
 
-        if arduino[n].nom.lower() == mot_action[x]:
-            cmp1 = arduino[n].nom
-            n += 1
-        else:
-            n += 1
+    cmp1 = name_finder(arduino, mot_action, x, inoPath)
+
     if cmp1 == "":
         print("Erreur ! Pas de nom dans la condition.")
         return
     x += 1
+
     if mot_action[x] == "est":
         x += 1
+        if mot_action[x] in a:
+            cmp2 = " == "
+            x += 1
+
+    elif mot_action[x] in egal:
+        x += 1
+        cmp2 = " == "
 
     if mot_action[x] == "moins" and mot_action[x + 1] == "que":
         x += 2
@@ -36,45 +40,49 @@ def IfCondition(mot_action, x, inoPath, arduino):
 
     elif mot_action[x] in superieur:
         x += 1
+        print("Supérieur !!")
         cmp2 = sup_ou_egal(mot_action, x)
 
-    elif mot_action[x] in egal:
+    if mot_action[x] in allumer:
         x += 1
-        cmp2 = "=="
-
-    elif mot_action[x] in allumer:
-        x += 1
-        cmp1 == f"digitalRead({cmp1}) "
-        cmp2 == "== "
-        cmp3 == "HIGH"
+        cmp1 = f"digitalRead({cmp1}) "
+        cmp2 = "== "
+        cmp3 = "HIGH"
 
     elif mot_action[x] in extinction:
         x += 1
-        cmp1 == f"digitalRead({cmp1}) "
-        cmp2 == "== "
-        cmp3 == "LOW"
+        cmp1 = f"digitalRead({cmp1}) "
+        cmp2 = "== "
+        cmp3 = "LOW"
 
-    else:
-        while x <= len(mot_action):
-            if mot_action[x].isdigit():
-                cmp3 = mot_action[x]
+    find = False
+    while x < len(mot_action) and not find:
+        if mot_action[x].isdigit():
+            cmp3 = mot_action[x]
+            find = True
+        else:
+            cmp3 = name_finder(arduino, mot_action, x, inoPath)
+            if cmp3 != "":
+                find = True
+        x += 1
 
-    clearWrite(inoPath, f"if ({cmp1}{cmp2}{cmp3}) {{\n\n }}")
+    clearWrite(inoPath, f"if ({cmp1}{cmp2}{cmp3}) {{\n\n}}\n\n")
+    increment_line(2)
 
 
 def inf_ou_egal(mot_action, x):
-    if mot_action[x + 1] == "ou" and mot_action[x + 2] in egal:
-        x += 3
-        cmp2 = "<="
+    if mot_action[x] == "ou" and mot_action[x + 1] in egal:
+        x += 2
+        cmp2 = " <= "
     else:
-        cmp2 = "<"
+        cmp2 = " < "
     return cmp2
 
 
 def sup_ou_egal(mot_action, x):
-    if mot_action[x + 1] == "ou" and mot_action[x + 2] in egal:
-        x += 3
-        cmp2 = "<="
+    if mot_action[x] == "ou" and mot_action[x + 1] in egal:
+        x += 2
+        cmp2 = " >= "
     else:
-        cmp2 = "<"
+        cmp2 = " > "
     return cmp2

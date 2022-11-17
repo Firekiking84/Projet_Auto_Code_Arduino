@@ -13,6 +13,8 @@ def formatage_txt(txt):
     return txt
 
 
+"""Vocabulaire"""
+
 si = ["if", "si", "quand"]
 tant_que = ["while", "tantque"]
 tant = ["tant", "tandis"]
@@ -27,6 +29,12 @@ adjectif_indefini = ["Aucun", "autre", "certain", "chaque", "différents", "dive
 chiffre = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 time_unit = ["heure", "heures", "minutes", "minute", "seconde", "secondes", "millisecondes", "milliseconde"]
 tout = ["tous", "tout", "toutes", "toute"]
-inferieur = ["inferieur", "sous"]
-egal = ["egal", "egale", "à", "a"]
-superieur = ["superieur", "au-dessus"]
+inferieur = ["inferieur", "sous", "inférieur"]
+egal = ["egal", "egale", "égale", "égal"]
+superieur = ["superieur", "au-dessus", "supérieur"]
+a = ["a", "à"]
+
+"""Type"""
+
+analog_input = ["e_analog"]
+digital_input = ["bp_pullup", "e_digital"]

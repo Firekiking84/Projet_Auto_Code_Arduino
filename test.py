@@ -5,9 +5,7 @@ Code Arduino voulu :
 
 void setup()
 {
-
     pinMode(led, OUTPUT);
-
 }
 void loop()
 {
@@ -18,9 +16,10 @@ void loop()
 }
 """
 
-file = open("test.txt", "r")
-x = 0
-for line in file:
-    x += 1
-    if line == "\n":
-        print(f"Vide, ligne n°{x}")
+class Module:
+    def __init__(self, nom, pin="N/A", type="digital"):
+        self.nom = nom
+        self.pin = pin
+        self.type = type
+
+arduino = []
