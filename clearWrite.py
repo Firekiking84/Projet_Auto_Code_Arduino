@@ -5,7 +5,11 @@ def clearWrite(path, msg):
     file = open(path, "r")
     information = file.readlines()
     file.close()
-    information[int(current_line)] = msg
+    current_line = int(current_line)
+    if current_line >= len(information):
+        while len(information) > current_line:
+            information.append("\n")
+    information[current_line] = msg
     file = open(path, "w")
     for x in range(len(information)):
         file.write(information[x])

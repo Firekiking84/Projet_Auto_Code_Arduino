@@ -29,7 +29,8 @@ def actionContent(mot_action, x, inoPath, arduino):
     n_target = 0
     value = 0
 
-    while mot_action[x].lower() not in stopper or x >= len(mot_action):
+    while x < len(mot_action) and mot_action[x].lower() not in stopper:
+        print(f"len : {len(mot_action)}\n x: {x}\n\n")
         if mot_action[x].lower() in cligno:
             isCligno = True
 
@@ -113,10 +114,12 @@ def actionContent(mot_action, x, inoPath, arduino):
         if arduino[n_target].type in digital_output:
             clearWrite(inoPath, f"digitalWrite({arduino[n_target].nom}, HIGH);\n\n")
             increment_line(1)
+
     elif isTargetLock and isExtinction:
         if arduino[n_target].type in digital_output:
             clearWrite(inoPath, f"digitalWrite({arduino[n_target].nom}, LOW);\n\n")
             increment_line(1)
+
     elif isTargetLock and isCligno and isTime:
         if arduino[n_target].type in digital_output:
             time_value = format_time(time_value, time)
@@ -125,3 +128,4 @@ def actionContent(mot_action, x, inoPath, arduino):
                                 f"digitalWrite({arduino[n_target].nom}, LOW);\n"
                                 f"delay({time_value});\n\n")
             increment_line(4)
+    return x

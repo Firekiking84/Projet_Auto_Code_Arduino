@@ -11,9 +11,9 @@ def Brain(reponse, inoPath, arduino):
         x = 0
         while x < len(mot_action):
             if mot_action[x] in si:
-                IfCondition(mot_action, x, inoPath, arduino)
+                x = IfCondition(mot_action, x, inoPath, arduino)
 
             else:
-                actionContent(mot_action, x, inoPath, arduino)
+                x = actionContent(mot_action, x, inoPath, arduino)
             x += 1
         i += 1

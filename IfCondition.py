@@ -67,9 +67,11 @@ def IfCondition(mot_action, x, inoPath, arduino):
         x += 1
 
     clearWrite(inoPath, f"if ({cmp1}{cmp2}{cmp3}) {{\n\n}}\n\n")
-    increment_line(2)
+    increment_line(1)
 
-    actionContent(mot_action, x, inoPath, arduino)
+    if x < len(mot_action):
+        x = actionContent(mot_action, x, inoPath, arduino)
+    return x
 
 
 def inf_ou_egal(mot_action, x):
