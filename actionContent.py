@@ -23,6 +23,7 @@ def actionContent(mot_action, x, inoPath, arduino):
 
     time = ""
     ms_time = ""
+    isTimedigit = False
     time_value = 0
     str_value = ""
     target = ""
@@ -30,7 +31,6 @@ def actionContent(mot_action, x, inoPath, arduino):
     value = 0
 
     while x < len(mot_action) and mot_action[x].lower() not in stopper:
-        print(f"len : {len(mot_action)}\n x: {x}\n\n")
         if mot_action[x].lower() in cligno:
             isCligno = True
 
@@ -54,12 +54,13 @@ def actionContent(mot_action, x, inoPath, arduino):
 
         elif mot_action[x][0] in chiffre:
             str_value = mot_action[x]
-            n = 0
+            isTimedigit = False
             for i in range(len(str_value)):
                 if str_value[i] not in chiffre:
-                    time[n] = str_value[i]
-                    n += 1
-            if n != 0:
+                    for n in range(len(chiffre)):
+                        time = str_value.replace(chiffre[x], '')
+                    isTimedigit = True
+            if isTimedigit:
                 for i in range(len(time_unit)):
                     if time == time_unit[i]:
                         isTime = True
@@ -78,8 +79,8 @@ def actionContent(mot_action, x, inoPath, arduino):
                         else:
                             time = ""
                             isTime = False
-                for x in range(len(alphabet)):
-                    time_value = str_value.replace(alphabet[x], "")
+                for i in range(len(alphabet)):
+                    time_value = str_value.replace(alphabet[i], "")
                     time_value = formatage_txt(time_value)
                     time_value = int(time_value)
             else:

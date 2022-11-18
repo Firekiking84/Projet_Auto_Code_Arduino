@@ -7,8 +7,9 @@ def clearWrite(path, msg):
     file.close()
     current_line = int(current_line)
     if current_line >= len(information):
-        while len(information) > current_line:
+        while len(information) <= current_line:
             information.append("\n")
+            print(len(information))
     information[current_line] = msg
     file = open(path, "w")
     for x in range(len(information)):

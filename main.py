@@ -123,22 +123,22 @@ for i in range(len(arduino)):
         clearWrite(inoPath, f"int {arduino[i].nom}_value = 0;\n\n")
         increment_line(1)
 
-clearWrite(inoPath, "void setup()\n{\n\n")
+clearWrite(inoPath, "\nvoid setup()\n{\n\n")
 increment_line(3)
 for i in range(len(arduino)):
 
     # void Setup
 
     if arduino[i].type == "s_digital" or arduino[i].type == "led":
-        clearWrite(inoPath, f"\tpinMode({arduino[i].nom}, OUTPUT);")
+        clearWrite(inoPath, f"\tpinMode({arduino[i].nom}, OUTPUT);\n\n")
         increment_line(1)
     elif arduino[i].type == "e_digital":
-        clearWrite(inoPath, f"\tpinMode({arduino[i].nom}, INPUT);")
+        clearWrite(inoPath, f"\tpinMode({arduino[i].nom}, INPUT);\n\n")
         increment_line(1)
     elif arduino[i].type == "bp_pullup":
-        clearWrite(inoPath, f"\tpinMode({arduino[i].nom}, INPUT_PULLUP);")
+        clearWrite(inoPath, f"\tpinMode({arduino[i].nom}, INPUT_PULLUP);\n\n")
         increment_line(1)
-file.write("}\nvoid loop()\n{\n\n}")
+clearWrite(inoPath, "}\nvoid loop()\n{\n\n}")
 increment_line(3)
 
 reponse = str(input("Explique ce que tu comptes faire !\n -->")).strip()

@@ -23,7 +23,8 @@ tant = ["tant", "tandis"]
 cligno = ["clignoter", "clignoté", "clignote"]
 allumer = ["s'allume", "allume", "allumer", "allumé", "s'allumer", "s'allumé", "allumée", "s'allumée", "activé",
            "active", "activer"]
-extinction = ["s'eteind", "s'eteint", "s'éteind", "s'éteint", "eteind", "eteint", "éteint", "éteind"]
+extinction = ["s'eteind", "s'eteint", "s'éteind", "s'éteint", "eteind", "eteint", "éteint", "éteind", "éteins",
+              "eteins"]
 article_defini = ["les", "la", "le"]
 article_indefini = ["un", "une", "des"]
 adjectif_indefini = ["Aucun", "autre", "certain", "chaque", "différents", "divers", "l'un", "l'autre", "maint", "même",
