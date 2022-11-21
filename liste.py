@@ -39,6 +39,7 @@ alors = ["alors", "Alors"]
 ensuite = ["ensuite", "après", "apres", "puis"]
 attend = ["attends", "attentes", "attente", "attend", "attend"]
 stopper = [".", "et", ","]
+met = ["mets", "met", "défini", "defini"]
 
 """Time Unit"""
 
@@ -50,3 +51,4 @@ time_unit = ["h", "heure", "heures", "min","minutes", "minute",  "s", "seconde",
 analog_input = ["e_analog"]
 digital_input = ["bp_pullup", "e_digital"]
 digital_output = ["s_digital", "led"]
+analog_output = ["s_analog"]

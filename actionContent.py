@@ -21,11 +21,12 @@ def actionContent(mot_action, x, inoPath, arduino):
     isTout = False
     isTargetLock = False
     isAttend = False
+    isMet = False
 
     time = ""
     ms_time = ""
     isTimedigit = False
-    time_value = 0
+    value = 0
     str_value = ""
     target = ""
     n_target = 0
@@ -57,6 +58,9 @@ def actionContent(mot_action, x, inoPath, arduino):
         elif mot_action[x].lower() in attend:
             isAttend = True
 
+        elif mot_action[x].lower() in met:
+            isMet = True
+
         elif mot_action[x][0] in chiffre:
             str_value = mot_action[x]
             isTimedigit = False
@@ -85,13 +89,13 @@ def actionContent(mot_action, x, inoPath, arduino):
                         else:
                             time = ""
                             isTime = False
-                time_value = str_value
+                value = str_value
                 for i in range(len(alphabet)):
-                    time_value = time_value.replace(alphabet[i], "")
-                time_value = formatage_txt(time_value)
-                time_value = int(time_value)
+                    value = value.replace(alphabet[i], "")
+                value = formatage_txt(value)
+                value = int(value)
             else:
-                time_value = int(str_value)
+                value = int(str_value)
 
         elif mot_action[x].lower() in time_unit:
             for i in range(len(time_unit)):
@@ -130,14 +134,22 @@ def actionContent(mot_action, x, inoPath, arduino):
 
     elif isTargetLock and isCligno and isTime:
         if arduino[n_target].type in digital_output:
-            time_value = format_time(time_value, time)
+            value = format_time(value, time)
             clearWrite(inoPath, f"digitalWrite({arduino[n_target].nom}, HIGH);\n"
-                                f"delay({time_value});\n"
+                                f"delay({value});\n"
                                 f"digitalWrite({arduino[n_target].nom}, LOW);\n"
-                                f"delay({time_value});\n\n")
+                                f"delay({value});\n\n")
             increment_line(4)
     elif isAttend and isTime:
-        time_value = format_time(time_value, time)
-        clearWrite(inoPath, f"delay({time_value});\n\n")
+        value = format_time(value, time)
+        clearWrite(inoPath, f"delay({value});\n\n")
         increment_line(1)
+
+    elif isTargetLock and isMet:
+        if arduino[n_target].type in digital_output:
+            clearWrite(inoPath, f"digitalWrite({arduino[n_target].nom}, {value});")
+            increment_line(1)
+        elif arduino[n_target].type in analog_output:
+            clearWrite(inoPath, f"analogWrite({arduino[n_target].nom}, {value});")
+            increment_line(1)
     return x
