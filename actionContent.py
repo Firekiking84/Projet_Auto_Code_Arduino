@@ -20,6 +20,7 @@ def actionContent(mot_action, x, inoPath, arduino):
     isAdjIndef = False
     isTout = False
     isTargetLock = False
+    isAttend = False
 
     time = ""
     ms_time = ""
@@ -32,6 +33,7 @@ def actionContent(mot_action, x, inoPath, arduino):
 
     while x < len(mot_action) and mot_action[x].lower() not in stopper:
         if mot_action[x].lower() in cligno:
+            print("Check Cligno")
             isCligno = True
 
         elif mot_action[x].lower() in allumer:
@@ -52,13 +54,17 @@ def actionContent(mot_action, x, inoPath, arduino):
         elif mot_action[x].lower() in tout:
             isTout = True
 
+        elif mot_action[x].lower() in attend:
+            isAttend = True
+
         elif mot_action[x][0] in chiffre:
             str_value = mot_action[x]
             isTimedigit = False
             for i in range(len(str_value)):
-                if str_value[i] not in chiffre:
+                if str_value[i] not in chiffre and not isTimedigit:
+                    time = str_value
                     for n in range(len(chiffre)):
-                        time = str_value.replace(chiffre[x], '')
+                        time = time.replace(chiffre[n], '')
                     isTimedigit = True
             if isTimedigit:
                 for i in range(len(time_unit)):
@@ -79,10 +85,11 @@ def actionContent(mot_action, x, inoPath, arduino):
                         else:
                             time = ""
                             isTime = False
+                time_value = str_value
                 for i in range(len(alphabet)):
-                    time_value = str_value.replace(alphabet[i], "")
-                    time_value = formatage_txt(time_value)
-                    time_value = int(time_value)
+                    time_value = time_value.replace(alphabet[i], "")
+                time_value = formatage_txt(time_value)
+                time_value = int(time_value)
             else:
                 time_value = int(str_value)
 
@@ -129,4 +136,8 @@ def actionContent(mot_action, x, inoPath, arduino):
                                 f"digitalWrite({arduino[n_target].nom}, LOW);\n"
                                 f"delay({time_value});\n\n")
             increment_line(4)
+    elif isAttend and isTime:
+        time_value = format_time(time_value, time)
+        clearWrite(inoPath, f"delay({time_value});\n\n")
+        increment_line(1)
     return x

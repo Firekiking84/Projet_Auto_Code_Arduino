@@ -5,10 +5,29 @@ from name_finder import name_finder
 from actionContent import actionContent
 
 
-def IfCondition(mot_action, x, inoPath, arduino):
-    x += 1
+def condition(mot_action, x, inoPath, arduino):
+    cndtn = ""
+    cmp1 = ""
     cmp2 = ""
     cmp3 = ""
+
+    if mot_action[x] in si:
+        cndtn = "if"
+        x += 1
+    elif mot_action[x] == "sinon":
+        if mot_action[x + 1] in si:
+            cndtn = "else if"
+            x += 2
+        else:
+            cndtn = "else"
+            x += 1
+    elif mot_action[x] in tant_que:
+        cndtn = "while"
+        x += 1
+    elif mot_action[x] in tant:
+        if mot_action[x + 1] == "que":
+            cndtn = "while"
+            x += 2
 
     cmp1 = name_finder(arduino, mot_action, x, inoPath)
 
@@ -45,18 +64,18 @@ def IfCondition(mot_action, x, inoPath, arduino):
 
     if mot_action[x] in allumer:
         x += 1
-        cmp1 = f"digitalRead({cmp1}) "
+        cmp1 = f"{cmp1} "
         cmp2 = "== "
-        cmp3 = "HIGH"
+        cmp3 = "0"
 
     elif mot_action[x] in extinction:
         x += 1
-        cmp1 = f"digitalRead({cmp1}) "
+        cmp1 = f"{cmp1} "
         cmp2 = "== "
-        cmp3 = "LOW"
+        cmp3 = "1"
 
     find = False
-    while x < len(mot_action) and not find:
+    while x < len(mot_action) and not find and cmp3 == "":
         if mot_action[x].isdigit():
             cmp3 = mot_action[x]
             find = True
@@ -66,7 +85,7 @@ def IfCondition(mot_action, x, inoPath, arduino):
                 find = True
         x += 1
 
-    clearWrite(inoPath, f"if ({cmp1}{cmp2}{cmp3}) {{\n\n}}\n\n")
+    clearWrite(inoPath, f"{cndtn} ({cmp1}{cmp2}{cmp3}) {{\n\n}}\n\n")
     increment_line(1)
 
     if x < len(mot_action):
