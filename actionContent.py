@@ -33,6 +33,9 @@ def actionContent(mot_action, x, inoPath, arduino):
     value = 0
 
     while x < len(mot_action) and mot_action[x].lower() not in stopper:
+        if mot_action[x] == '':
+            x += 1
+        print(f"Mot : {mot_action[x]}")
         if mot_action[x].lower() in cligno:
             print("Check Cligno")
             isCligno = True
@@ -41,6 +44,7 @@ def actionContent(mot_action, x, inoPath, arduino):
             isAllumer = True
 
         elif mot_action[x].lower() in extinction:
+            print("Check extinction")
             isExtinction = True
 
         elif mot_action[x].lower() in article_defini:

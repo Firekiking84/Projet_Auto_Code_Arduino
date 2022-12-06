@@ -22,9 +22,9 @@ tant_que = ["while", "tantque"]
 tant = ["tant", "tandis"]
 cligno = ["clignoter", "clignoté", "clignote"]
 allumer = ["s'allume", "allume", "allumer", "allumé", "s'allumer", "s'allumé", "allumée", "s'allumée", "activé",
-           "active", "activer"]
+           "active", "activer", "s'active"]
 extinction = ["s'eteind", "s'eteint", "s'éteind", "s'éteint", "eteind", "eteint", "éteint", "éteind", "éteins",
-              "eteins", "éteinte", "eteinte"]
+              "eteins", "éteinte", "eteinte", "eteinds", "éteindre"]
 article_defini = ["les", "la", "le"]
 article_indefini = ["un", "une", "des"]
 adjectif_indefini = ["Aucun", "autre", "certain", "chaque", "différents", "divers", "l'un", "l'autre", "maint", "même",
@@ -37,7 +37,7 @@ superieur = ["superieur", "au-dessus", "supérieur"]
 a = ["a", "à"]
 alors = ["alors", "Alors"]
 ensuite = ["ensuite", "après", "apres", "puis"]
-attend = ["attends", "attentes", "attente", "attend", "attend"]
+attend = ["attends", "attentes", "attente", "attend", "attend", "attendre"]
 stopper = [".", "et", ","]
 met = ["mets", "met", "défini", "defini"]
 

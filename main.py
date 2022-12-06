@@ -3,6 +3,7 @@ from liste import *
 from brain import Brain
 from clearWrite import clearWrite
 from increment_line import increment_line
+import subprocess, os, platform
 
 path = os.getcwd()
 
@@ -17,6 +18,7 @@ class Module:
         self.nom = nom
         self.pin = pin
         self.type = type
+
 
 arduino = []
 
@@ -39,7 +41,7 @@ while not right:
     if len(reponse) == 0:
         print("Il faut écrire quelque chose !")
     else:
-        right= True
+        right = True
         reponse = formatage_txt(reponse)
         if not os.path.exists(f"{path}/Codes générés/{reponse}"):
             os.mkdir(f"{path}/Codes générés/{reponse}")
@@ -78,7 +80,8 @@ for i in range(nb_module):
             arduino.append(Module(reponse))
             right = True
 
-    arduino[len(arduino)-1].pin = str(input(f"Sur quel pin est branché {arduino[len(arduino)-1].nom}\n--> ")).strip()
+    arduino[len(arduino) - 1].pin = str(
+        input(f"Sur quel pin est branché {arduino[len(arduino) - 1].nom}\n--> ")).strip()
     refresh_screen()
 
     print("En cas d'erreur, le pin peut être modifié directement sur le script")
@@ -93,7 +96,7 @@ for i in range(nb_module):
                             f"(Ajout de plus de types à venir !)--> "))
         right = True
         if reponse == '1':
-            arduino[len(arduino)-1].type = "s_digital"
+            arduino[len(arduino) - 1].type = "s_digital"
         elif reponse == '2':
             arduino[len(arduino) - 1].type = "e_digital"
         elif reponse == '3':
@@ -146,3 +149,4 @@ reponse = str(input("Explique ce que tu comptes faire !\n -->")).strip()
 interpretation = reponse.lower().split(".")
 
 Brain(interpretation, inoPath, arduino)
+os.startfile(inoPath)
