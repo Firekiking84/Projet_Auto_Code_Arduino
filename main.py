@@ -80,9 +80,15 @@ for i in range(nb_module):
             arduino.append(Module(reponse))
             right = True
 
-    arduino[len(arduino) - 1].pin = str(
-        input(f"Sur quel pin est branché {arduino[len(arduino) - 1].nom}\n--> ")).strip()
-    refresh_screen()
+    right = False
+    while not right:
+        right = True
+        arduino[len(arduino) - 1].pin = str(
+            input(f"Sur quel pin est branché {arduino[len(arduino) - 1].nom}\n--> ")).strip()
+        refresh_screen()
+        if arduino[len(arduino) - 1].pin == '':
+            right = False
+            print("Il faut écrire quelque chose !")
 
     print("En cas d'erreur, le pin peut être modifié directement sur le script")
     right = False

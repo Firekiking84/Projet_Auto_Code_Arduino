@@ -66,6 +66,7 @@ def actionContent(mot_action, x, inoPath, arduino):
             isMet = True
 
         elif mot_action[x][0] in chiffre:
+            print("Check Chiffre")
             str_value = mot_action[x]
             isTimedigit = False
             for i in range(len(str_value)):
@@ -120,6 +121,7 @@ def actionContent(mot_action, x, inoPath, arduino):
         else:
             for t in range(len(arduino)):
                 if arduino[t].nom.lower() == mot_action[x].lower():
+                    print(f"Target check")
                     target = arduino[t].nom
                     n_target = t
             if target != "":
