@@ -14,11 +14,15 @@ def Brain(reponse, inoPath, arduino):
         mot_action = ' '.join(mot_action)
         mot_action = mot_action.split(' ')
         x = 0
+        if mot_action[x] == "":
+            x += 1
         while x < len(mot_action):
             if isCondition(mot_action, x):
                 x = condition(mot_action, x, inoPath, arduino)
+                print(f"Condition: {x}")
 
             else:
                 x = actionContent(mot_action, x, inoPath, arduino)
+                print(f"Action :{x}")
             x += 1
         i += 1

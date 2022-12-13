@@ -1,14 +1,18 @@
-#define t 5
+#define LED 8
+#define BP 6
+int BP_value = 0;
 
 void setup()
 {
-	pinMode(t, OUTPUT);
+	pinMode(LED, OUTPUT);
+	pinMode(BP, INPUT_PULLUP);
 }
 void loop()
 {
-digitalWrite(t, HIGH);
-delay(5000);
-digitalWrite(t, LOW);
-delay(5000);
+BP_value = digitalRead(BP);
+if (BP_value == 0) {
+digitalWrite(LED, HIGH);
+
+}
 
 }

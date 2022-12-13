@@ -11,23 +11,30 @@ def condition(mot_action, x, inoPath, arduino):
     cmp2 = ""
     cmp3 = ""
 
-    if mot_action[x] in si:
-        cndtn = "if"
-        x += 1
-    elif mot_action[x] == "sinon":
-        if mot_action[x + 1] in si:
-            cndtn = "else if"
-            x += 2
-        else:
-            cndtn = "else"
+    find = False
+    while not find:
+        if mot_action[x] in si:
+            cndtn = "if"
             x += 1
-    elif mot_action[x] in tant_que:
-        cndtn = "while"
-        x += 1
-    elif mot_action[x] in tant:
-        if mot_action[x + 1] == "que":
+        elif mot_action[x] == "sinon":
+            if mot_action[x + 1] in si:
+                cndtn = "else if"
+                x += 2
+            else:
+                cndtn = "else"
+                x += 1
+        elif mot_action[x] in tant_que:
             cndtn = "while"
-            x += 2
+            x += 1
+        elif mot_action[x] in tant:
+            if mot_action[x + 1] == "que":
+                cndtn = "while"
+                x += 2
+        if cndtn != "":
+            print(cndtn)
+            find = True
+        else:
+            x += 1
 
     cmp1 = name_finder(arduino, mot_action, x, inoPath)
 

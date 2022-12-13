@@ -14,10 +14,11 @@ def refresh_screen():
 
 
 class Module:
-    def __init__(self, nom, pin="N/A", type="digital"):
+    def __init__(self, nom, pin="N/A", type="digital", info="N/A"):
         self.nom = nom
         self.pin = pin
         self.type = type
+        self.info = info
 
 
 arduino = []
@@ -25,6 +26,7 @@ arduino = []
 file = open("current_line.txt", 'w')
 file.write('0')
 file.close()
+degree = 0
 
 print('\033[93m')
 print("Bienvenue dans l'Autocodeur Arduino !")
@@ -34,6 +36,7 @@ print('\033[0m')
 reponse = str(input(""))
 
 right = False
+right2 = False
 while not right:
     refresh_screen()
     reponse = str(input("Quel est le nom de ton projet ?\n--> ")).strip()
@@ -97,7 +100,7 @@ for i in range(nb_module):
         reponse = str(input(f"Paramètres basiques :           Paramètres préenregistré : \n\n"
                             f"1 : Sortie Digital              5 : Led\n"
                             f"2 : Entrée Digital              6 : Bouton poussoir\n"
-                            f"3 : Sortie Analogique           7 : Moteur Pas à Pas\n"
+                            f"3 : Sortie Analogique           7 : Servo Moteur\n"
                             f"4 : Entrée Analogique\n\n"
                             f"(Ajout de plus de types à venir !)--> "))
         right = True
@@ -115,7 +118,11 @@ for i in range(nb_module):
             arduino[len(arduino) - 1].type = "bp_pullup"
         elif reponse == '7':
             arduino[len(arduino) - 1].type = "p_motor"
-
+            while not right2:
+                degree = str(input("Quel est l'angle d'ouverture du servo ? (180° en général) :\n--> "))
+                if degree.isdigit():
+                    arduino[len(arduino) - 1].info = degree
+                    right2 = True
         else:
             right = False
             refresh_screen()
